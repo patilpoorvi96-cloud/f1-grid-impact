@@ -2,6 +2,7 @@
 
 Run with:  streamlit run app.py
 """
+import altair as alt
 import pandas as pd
 import streamlit as st
 
@@ -85,7 +86,18 @@ with tab2:
             "Grid-finish correlation near 1 means the starting order mostly decides the result "
             "(overtaking is hard). Lower means more shuffling."
         )
-        st.bar_chart(circuits["grid_finish_corr"], horizontal=True, height=max(300, 22 * len(circuits)))
+        chart_df = circuits.reset_index()[["circuit_name", "grid_finish_corr", "races"]]
+        chart = (
+            alt.Chart(chart_df)
+            .mark_bar()
+            .encode(
+                x=alt.X("grid_finish_corr:Q", title="Grid-finish correlation"),
+                y=alt.Y("circuit_name:N", sort="-x", title=None, axis=alt.Axis(labelLimit=300)),
+                tooltip=["circuit_name", "grid_finish_corr", "races"],
+            )
+            .properties(height=max(300, 22 * len(chart_df)))
+        )
+        st.altair_chart(chart, width="stretch")
 
         st.subheader("Compare two circuits")
         names = list(circuits.index)
