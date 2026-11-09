@@ -60,7 +60,31 @@ Optional: `python model.py` prints the model evaluation in the terminal.
 - Deploy the app online.
 
 ## What I built myself
-*(Fill this in honestly: what you wrote, what you changed, what you learned.)*
+I chose the Motorsport theme and defined the question: how much does starting position decide an F1 race result, and does it vary by circuit?
+
+**What I did**
+- Picked the theme and the question, and found the Kaggle F1 dataset.
+- Built the project with AI assistance, then ran it on the real data and fixed the setup problems myself (data folder paths, Python and Streamlit setup).
+- Went through the results and the charts to understand what they show, for example why the circuit chart needed to be sorted from highest to lowest.
+- Took the screenshots, created the public GitHub repository and pushed the code with Git.
+
+**What I understand and can explain**
+- How the five tables are merged and why pit-lane starts (grid = 0) are removed.
+- How the circuit score works: a Spearman correlation between grid and finishing position.
+- Why the model trains on 2014-2021 and tests on 2022 onwards, so it is judged on unseen seasons.
+- Why the team's previous-season points are used as a feature, to avoid data leakage.
+- Why ROC AUC is more useful than accuracy here: about 85% of entries do not finish on the podium.
+
+**AI use:** I used an AI assistant to help write and debug the code, as the challenge allows. I reviewed how each part works so I can explain it.
+
+**What I learned:** merging tables with pandas, avoiding data leakage, evaluating a model honestly, building a Streamlit dashboard, and using Git and GitHub.
 
 ## Screenshots
-*(Add screenshots of each tab here.)*
+### Grid vs. finish
+![Grid vs finish](screenshots/tab1.png)
+
+### Circuit explorer
+![Circuit explorer](screenshots/tab2.png)
+
+### Podium predictor
+![Podium predictor](screenshots/tab3.png)
